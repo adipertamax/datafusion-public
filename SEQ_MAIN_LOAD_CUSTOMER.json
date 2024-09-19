@@ -1,0 +1,48 @@
+{
+  "name": "SEQ_MAIN_LOAD_CUSTOMER",
+  "appVersion": "d503dea3-7695-11ef-b56d-2a38619b195c",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "cdap",
+    "creationTimeMillis": 1726757136794,
+    "latest": true
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"BigQuery\",\"to\":\"Wrangler\"},{\"from\":\"Wrangler\",\"to\":\"BigQuery2\"}],\"comments\":[],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":false,\"stages\":[{\"name\":\"BigQuery\",\"plugin\":{\"name\":\"BigQueryTable\",\"type\":\"batchsource\",\"label\":\"BigQuery\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"useConnection\":\"true\",\"connection\":\"${conn(BigQuery Default)}\",\"referenceName\":\"sink_bq\",\"dataset\":\"STAGING\",\"table\":\"CUSTOMER\",\"enableQueryingViews\":\"false\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}],\"id\":\"BigQuery\"},{\"name\":\"Wrangler\",\"plugin\":{\"name\":\"Wrangler\",\"type\":\"transform\",\"label\":\"Wrangler\",\"artifact\":{\"name\":\"wrangler-transform\",\"version\":\"4.10.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"field\":\"*\",\"expressionLanguage\":\"jexl\",\"precondition\":\"false\",\"on-error\":\"fail-pipeline\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}],\"inputSchema\":[{\"name\":\"BigQuery\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}],\"id\":\"Wrangler\"},{\"name\":\"BigQuery2\",\"plugin\":{\"name\":\"BigQueryTable\",\"type\":\"batchsink\",\"label\":\"BigQuery2\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"useConnection\":\"true\",\"connection\":\"${conn(BigQuery Default)}\",\"referenceName\":\"destination_bq\",\"dataset\":\"STAGING\",\"table\":\"TEST_TABLE_FUSION\",\"operation\":\"insert\",\"truncateTable\":\"false\",\"allowSchemaRelaxation\":\"false\",\"location\":\"asia-southeast2\",\"createPartitionedTable\":\"false\",\"partitioningType\":\"TIME\",\"timePartitioningType\":\"DAY\",\"partitionFilterRequired\":\"false\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}],\"inputSchema\":[{\"name\":\"Wrangler\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"nama\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"umur\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"kota\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"date_pr\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]}]}\"}],\"id\":\"BigQuery2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "SEQ_MAIN_LOAD_CUSTOMER",
+      "name": "phase-1",
+      "description": "Sources \u0027BigQuery\u0027 to sinks \u0027BigQuery2\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "SEQ_MAIN_LOAD_CUSTOMER",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "BigQuery2",
+      "name": "BigQueryTable",
+      "type": "batchsink"
+    },
+    {
+      "id": "BigQuery",
+      "name": "BigQueryTable",
+      "type": "batchsource"
+    },
+    {
+      "id": "Wrangler",
+      "name": "Wrangler",
+      "type": "transform"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.10.1",
+    "scope": "SYSTEM"
+  }
+}
